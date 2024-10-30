@@ -22,3 +22,4 @@
 <script src="<?= base_url(); ?>assets-office/js/switcher.js"></script>
 <script defer src="<?= base_url(); ?>assets-office/js/theme-settings.js"></script>
 <script src="<?= base_url(); ?>assets-office/js/main.js"></script>
+<!-- <script src="<?= base_url(); ?>assets-office/js/pages/crud/file-upload/dropzonejs.js"></script> -->

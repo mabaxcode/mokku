@@ -5,6 +5,7 @@
 <!--<![endif]-->
 
 <? $this->load->view('template-office/header'); ?>
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
 <body class="body">
 
@@ -690,11 +691,10 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!-- form-add-product -->
-                                <form id="upload-product-img" enctype="multipart/form-data">
-                                    <div class="wg-box mb-30">
+                                <form class="form-add-product" >
+                                <div class="wg-box mb-30">
                                         <fieldset>
-                                            <div class="body-title mb-10">Upload images</div>
+                                            <!-- <div class="body-title mb-10">Upload images</div>
                                             <div class="upload-image mb-16">
                                                 <div class="up-load">
                                                     <label class="uploadfile" for="myFile">
@@ -702,22 +702,34 @@
                                                             <i class="icon-upload-cloud"></i>
                                                         </span>
                                                         <div class="text-tiny">Drop your images here or select <span class="text-secondary">click to browse</span></div>
-                                                        <input type="file" name="product_img" accept="image/*" id="product-img">
+                                                        <input type="file" id="myFile" name="filename">
                                                         <img src="" id="myFile-input" alt="">
                                                     </label>
                                                 </div>
                                                 <div class="flex gap20 flex-wrap">
                                                     <div class="item">
-                                                        <img src="<?= base_url();?>assets/images/upload/img-1.jpg" alt="">
+                                                        <img src="images/upload/img-1.jpg" alt="">
+                                                    </div>
+                                                    <div class="item">
+                                                        <img src="images/upload/img-2.jpg" alt="">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?= $tempkey; ?>
-                                            <div class="body-text">You need to add at least 4 images. Pay attention to the quality of the pictures you add, comply with the background color standards. Pictures must be in certain dimensions. Notice that the product shows all the details</div>
+                                            <div class="body-text">You need to add at least 4 images. Pay attention to the quality of the pictures you add, comply with the background color standards. Pictures must be in certain dimensions. Notice that the product shows all the details</div> -->
+                                            <!-- <div class="col-lg-12 col-md-9 col-sm-12"> -->
+                                                <div class="upload-image mb-16" id="kt_dropzone_1">
+                                                    <div class="dropzone-msg dz-message needsclick up-load">
+                                                        <label class="uploadfile" for="myFile">
+                                                            <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                                            <span class="dropzone-msg-desc">This is just a demo dropzone. Selected files are
+                                                            <strong>not</strong>actually uploaded.</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            <!-- </div> -->
                                         </fieldset>
                                     </div>
-                                </form>
-                                <form class="form-add-product" >
+                                
                                     <div class="wg-box mb-30">
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Product title <span class="tf-color-1">*</span></div>
@@ -842,30 +854,45 @@
     <!-- /#wrapper -->
 
     <? $this->load->view('template-office/script'); ?>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#upload-product-img').on('submit', function(event) {
+    <script>
+        
+        var myDropzone = new Dropzone("#kt_dropzone_1", {
+            url: base_url + 'manage/upload_product_img',
+            paramName: "file", 
+            maxFiles: 1,
+            maxFilesize: 10,
+            addRemoveLinks: true,
+            acceptedFiles: "image/*", // Accept images only
+            // params: {module_name:module_name},
+            init: function () {
+                this.on("success", function (file, response) {
+                    // response = JSON.parse(response);
+                    // if (response.status == true) {
+                    //     Swal.fire({
+                    //         text: response.msg,
+                    //         icon: "success",
+                    //         buttonsStyling: !1,
+                    //         confirmButtonText: "Ok, got it!",
+                    //         customClass: {
+                    //             confirmButton: "btn btn-primary"
+                    //         }
+                    //     }).then((function(t) {
+                    //         if (t.isConfirmed) {
+                    //             location.reload();
+                    //         }
+                    //     }))
+                    // } else {
+                    //     $("#error-upload").html(response.msg);
+                    // }
+                    this.removeFile(file);
+                    // alert ('sh');
+                })
 
-                event.preventDefault(); // Prevent the default form submission
-
-                var formData = new FormData(this); // Create a FormData object
-
-                $.ajax({
-                    url: base_url + 'manage/upload_product_img',
-                    type: 'POST',
-                    data: formData,
-                    contentType: false, // Tell jQuery not to set contentType
-                    processData: false, // Tell jQuery not to process the data
-                    success: function(response) {
-                        $('#response').html(response); // Display the response
-                    },
-                    error: function() {
-                        $('#response').html('Error uploading image.');
-                    }
-                });
-            });
+            }
         });
+
     </script>
 
 </body>

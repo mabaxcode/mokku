@@ -21,6 +21,6 @@ class Manage extends CI_Controller {
 
 	function upload_product_img($data=false)
 	{
-		print_r($_FILES['product_img']);
+		print_r($_FILES['file']);
 	}
 }
