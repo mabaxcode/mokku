@@ -612,9 +612,9 @@
     $(".color-btn, .size-btn").on("click", function () {
       var newPrice = parseFloat($(this).data("price")) || basePrice;
       quantityInput.val(1);
-      $(".price-on-sale").text("$" + newPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+      $(".price-on-sale").text("RM" + newPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
       var totalPrice = newPrice;
-      $(".total-price").text("$" + totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+      $(".total-price").text("RM" + totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     });
 
     $(".btn-increase").on("click", function () {
@@ -632,10 +632,10 @@
     });
 
     function updateTotalPrice() {
-      var currentPrice = parseFloat($(".price-on-sale").text().replace("$", ""));
+      var currentPrice = parseFloat($(".price-on-sale").text().replace("RM", ""));
       var quantity = parseInt(quantityInput.val());
       var totalPrice = currentPrice * quantity;
-      $(".total-price").text("$" + totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+      $(".total-price").text("RM" + totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
   };

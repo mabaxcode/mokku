@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets-office/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets-office/css/bootstrap-select.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets-office/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets-office/css/dataTables.dataTables.css">
 
 
 
@@ -30,5 +31,30 @@
     <!-- Favicon and Touch Icons  -->
     <link rel="shortcut icon" href="<?= base_url(); ?>assets-office/images/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="<?= base_url(); ?>assets-office/images/favicon.png">
+
+   <style>
+    .list-product-table {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .list-product-table td, .list-product-table th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    .list-product-table tr:nth-child(even){background-color: #f2f2f2;}
+
+    .list-product-table tr:hover {background-color: #ddd;}
+
+    .list-product-table th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+    </style>
 
 </head>

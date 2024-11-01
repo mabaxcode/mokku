@@ -14,63 +14,47 @@ function getRandomString($n) {
     return $rand;
 }
 
-/*
-
-function get_any_table_row($data_where, $table, $order_latest = false)
-{
-    $tco = load_instance();
-    $tco->load->database();
-
-    $tco->db->select('*');
-    $tco->db->where($data_where);
-    if ($order_latest <> false) {
-        $tco->db->order_by($order_latest, 'desc');
-    }
-    $query = $tco->db->get($table);
-
-    if ($query->num_rows() > 0) { return $query->row_array(); }
-
-    return false;
-}
-
-function insert_any_table($data_insert, $table)
-{
-    $tco = load_instance();
-    $tco->load->database();
-
-    $tco->db->insert($table, $data_insert);
-    return $tco->db->affected_rows();
-}
-
 function current_dt()
 {
     $now = date('Y-m-d H:i:s');
     return $now;
 }
 
-function display_current_dt()
+function insert_any_table($data_insert, $table)
 {
-    $now = date('d F Y');
-    return $now;
+    $ci = load_instance();
+    $ci->load->database();
+
+    $ci->db->insert($table, $data_insert);
+    return $ci->db->affected_rows();
 }
 
 function update_any_table($data_upd, $data_where, $table)
 {
-    $tco = load_instance();
-    $tco->load->database();
+    $ci = load_instance();
+    $ci->load->database();
 
-    $tco->db->set($data_upd);
-    $tco->db->where($data_where);
-    $tco->db->update($table);
-    return $tco->db->affected_rows();
+    $ci->db->set($data_upd);
+    $ci->db->where($data_where);
+    $ci->db->update($table);
+    return $ci->db->affected_rows();
 }
 
-function delete_any_table($where, $table)
+function get_any_table_row($data_where, $table, $order_latest = false)
 {
-    $tco = load_instance();
-    $tco->load->database();
-    $tco->db->delete($table, $where);
-    return $tco->db->affected_rows();
+    $ci = load_instance();
+    $ci->load->database();
+
+    $ci->db->select('*');
+    $ci->db->where($data_where);
+    if ($order_latest <> false) {
+        $ci->db->order_by($order_latest, 'desc');
+    }
+    $query = $ci->db->get($table);
+
+    if ($query->num_rows() > 0) { return $query->row_array(); }
+
+    return false;
 }
 
 function encode($str)
@@ -84,6 +68,79 @@ function encode($str)
     $return = json_encode($str, JSON_PRETTY_PRINT);
     return $return;
 }
+
+function get_any_table_array($data_where = false, $table = false, $col_sort = false, $type_sort = false)
+{
+    $ci = load_instance();
+    $ci->load->database();
+
+    $ci->db->select('*');
+    if($data_where <> false){
+        $ci->db->where($data_where);
+    }
+    
+    if ($col_sort <> false) {
+        $sort = ($type_sort == false) ? "desc" : $type_sort;
+        $ci->db->order_by($col_sort, $sort);
+    }
+    $query = $ci->db->get($table);
+
+    if ($query->num_rows() > 0) {
+        return $query->result_array();
+    } else {
+        return false;
+    }
+}
+
+function get_keytab_value($key)
+{
+    $ci = load_instance();
+    $ci->load->database();
+
+    $ci->db->select('*');
+    $ci->db->where(array('key_type' => $key));
+    $query = $ci->db->get('keytab');
+
+    if ($query->num_rows() > 0) {
+        $result = $query->row();
+        update_keytab_value($key, $result->key_val);
+        return $result->key_val;
+    } else {
+        return false;
+    }
+}
+
+function update_keytab_value($key, $val)
+{
+    $ci = load_instance();
+    $ci->load->database();
+
+    $ci->db->set(array('key_val' => $val + 1));
+    $ci->db->where(array('key_type' => $key));
+    $ci->db->update('keytab');
+
+    return $ci->db->affected_rows();
+}
+
+/*
+
+function display_current_dt()
+{
+    $now = date('d F Y');
+    return $now;
+}
+
+
+
+function delete_any_table($where, $table)
+{
+    $tco = load_instance();
+    $tco->load->database();
+    $tco->db->delete($table, $where);
+    return $tco->db->affected_rows();
+}
+
+
 
 function view_profile_picture($data)
 {

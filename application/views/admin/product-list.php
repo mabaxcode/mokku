@@ -5,7 +5,6 @@
 <!--<![endif]-->
 
 <? $this->load->view('template-office/header'); ?>
-<?/*<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> */?>
 
 <body class="body">
 
@@ -488,7 +487,7 @@
                             <!-- main-content-wrap -->
                             <div class="main-content-wrap">
                                 <div class="flex items-center flex-wrap justify-between gap20 mb-30">
-                                    <h3>Add Product</h3>
+                                    <h3>All Products</h3>
                                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                                         <li>
                                             <a href="index.html"><div class="text-tiny">Dashboard</div></a>
@@ -503,193 +502,49 @@
                                             <i class="icon-chevron-right"></i>
                                         </li>
                                         <li>
-                                            <div class="text-tiny">Add Product</div>
+                                            <div class="text-tiny">All Products</div>
                                         </li>
                                     </ul>
                                 </div>
-                                
-                               
-
-
-                                    <div class="wg-box mb-30">
-                                        <form id="uploadForm" enctype="multipart/form-data">
-                                            <input type="hidden" name="tempkey" value="<?=$tempkey?>">
-                                            <fieldset>
-                                                <div class="body-title mb-10">Upload images</div>
-                                                <div class="upload-image mb-16">
-                                                    <div class="up-load">
-                                                        <label class="uploadfile" for="myFile">
-                                                            <span class="icon">
-                                                                <i class="icon-upload-cloud"></i>
-                                                            </span>
-                                                            <div class="text-tiny">Drop your images here or select <span class="text-secondary">click to browse</span></div>
-                                                            <!-- <input type="file" id="myFile" name="filename"> -->
-                                                            <input type="file" id="myFile" class="direct-upload" name="image" accept="image/*">
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div id="uploadStatus"></div>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-
-                                    <form class="form-add-product" action="<?= base_url('manage/saveProduct'); ?>" method='post' id="add-product-formid">
-                                    <input type="hidden" name="tempkey" value="<?=$tempkey?>">
-                                    <div class="wg-box mb-30">
-                                        <fieldset class="name">
-                                            <div class="body-title mb-10">Product title <span class="tf-color-1">*</span></div>
-                                            <input class="mb-10" type="text" placeholder="Enter title" name="name" tabindex="0" aria-required="true" required="">
-                                            <div class="text-tiny text-surface-2">Do not exceed 20 characters when entering the product name.</div>
-                                        </fieldset>
-                                        <fieldset class="category">
-                                            <div class="body-title mb-10">Category <span class="tf-color-1">*</span></div>
-                                            <!-- <input class="" type="text" placeholder="Choose category" name="text" tabindex="0" value="" aria-required="true" required=""> -->
-                                            <select name="category" required>
-                                                <option value="">Choose category</option>
-                                                <option value="1">Kain Sarung</option>
-                                                <option value="2">Kaftan</option>
-                                                <option value="3">Kemeja</option>
-                                                <option value="4">Kaftan Sepasang</option>
-                                            </select>
-                                        </fieldset>
-                                        <div class="cols-lg gap22">
-                                            <fieldset class="price">
-                                                <div class="body-title mb-10">Price <span class="tf-color-1">*</span></div>
-                                                <input class="" type="number" placeholder="Price" name="price" tabindex="0"aria-required="true" required="">
-                                            </fieldset>
-                                            <fieldset class="category">
-                                                <div class="body-title mb-10">Stock <span class="tf-color-1">*</span></div>
-                                                <input class="" type="text" placeholder="Enter Stock" name="stock" tabindex="0" aria-required="true" required="">
-                                            </fieldset>
-                                            <fieldset class="variant-picker-item">
-                                                <div class="variant-picker-label body-title">
-                                                    Color: 
-                                                    <!-- <span class="body-title-2 fw-4 variant-picker-label-value">Orange</span> -->
-                                                </div>
-                                                <div class="variant-picker-values">
-
-                                                    <? foreach ($colors as $colorval) { ?>
-
-                                                            <input id="values-orange" type="checkbox" name="color[]" value="<?= $colorval['id']?>">
-                                                            <label class="radius-60" for="values-<?=$colorval['value']?>" data-value="<?=ucfirst($colorval['value'])?>">
-                                                                <span class="btn-checkbox bg-color-<?= $colorval['value']?>"></span>
-                                                            </label>
-
-                                                    <? } ?>
-
-                                                    <!-- <input id="values-blue" type="checkbox" name="color[]" value="2">
-                                                    <label class="radius-60" for="values-blue" data-value="Blue">
-                                                        <span class="btn-checkbox bg-color-blue"></span>
-                                                    </label>
-                                                    <input id="values-yellow" type="checkbox" name="color[]" value="3">
-                                                    <label class="radius-60" for="values-yellow" data-value="Yellow">
-                                                        <span class="btn-checkbox bg-color-yellow"></span>
-                                                    </label>
-                                                    <input id="values-black" type="checkbox" name="color[]" value="4">
-                                                    <label class="radius-60" for="values-black" data-value="Black">
-                                                        <span class="btn-checkbox bg-color-black"></span>
-                                                    </label> -->
-                                                </div>
-                                            </fieldset>
-                                            <!-- <fieldset class="sale-price">
-                                                <div class="body-title mb-10">Sale Price </div>
-                                                <input class="" type="number" placeholder="Sale Price " name="text" tabindex="0" value="" aria-required="true" required="">
-                                            </fieldset> -->
-                                            <!-- <fieldset class="schedule">
-                                                <div class="body-title mb-10">Schedule</div>
-                                                <input type="date" name="date" >
-                                            </fieldset> -->
+                                <!-- product-list -->
+                                <div class="wg-box">
+                                    
+                                    <div class="flex items-center justify-between gap10 flex-wrap">
+                                        <div class="wg-filter flex-grow">
+                                            
                                         </div>
-                                        <div class="cols-lg gap22">
-                                            <!-- <fieldset class="choose-brand">
-                                                <div class="body-title mb-10">Brand <span class="tf-color-1">*</span></div>
-                                                <input class="" type="text" placeholder="Choose brand" name="text" tabindex="0" value="" aria-required="true" required="">
-                                            </fieldset> -->
-                                            <fieldset class="variant-picker-item">
-                                                <div class="variant-picker-label body-title">
-                                                    Size: 
-                                                    <!-- <span class="body-title-2 variant-picker-label-value">S</span> -->
-                                                </div>
-                                                <div class="variant-picker-values">
-
-                                                    <input type="checkbox" name="size[]" id="values-s" checked value="1">
-                                                    <label class="style-text" for="values-s" data-value="S">
-                                                        <div class="text">S</div>
-                                                    </label>
-
-                                                    <input type="checkbox" name="size[]" id="values-m" value="2">
-                                                    <label class="style-text" for="values-m" data-value="M">
-                                                        <div class="text">M</div>
-                                                    </label>
-
-                                                    <input type="checkbox" name="size[]" id="values-l" value="3">
-                                                    <label class="style-text" for="values-l" data-value="L">
-                                                        <div class="text">L</div>
-                                                    </label>
-
-                                                    <input type="checkbox" name="size[]" id="values-xl" value="4">
-                                                    <label class="style-text" for="values-xl" data-value="XL">
-                                                        <div class="text">XL</div>
-                                                    </label>
-                                                </div>
-                                            </fieldset>
-                                            <!-- <fieldset class="variant-picker-item">
-                                                <div class="variant-picker-label body-title">
-                                                    Size: 
-                                                    <span class="body-title-2 variant-picker-label-value">S</span>
-                                                </div>
-                                                <div class="variant-picker-values">
-
-                                                    <input type="checkbox" name="size" id="values-s">
-                                                    <label class="style-text" for="values-s" data-value="S">
-                                                        <div class="text">S</div>
-                                                    </label>
-
-                                                    <input type="checkbox" name="size" id="values-m">
-                                                    <label class="style-text" for="values-m" data-value="M">
-                                                        <div class="text">M</div>
-                                                    </label>
-
-                                                    <input type="checkbox" name="size" id="values-l">
-                                                    <label class="style-text" for="values-l" data-value="L">
-                                                        <div class="text">L</div>
-                                                    </label>
-
-                                                    <input type="checkbox" name="size" id="values-xl">
-                                                    <label class="style-text" for="values-xl" data-value="XL">
-                                                        <div class="text">XL</div>
-                                                    </label>
-                                                </div>
-                                            </fieldset> -->
-                                        </div>
-                                        <!-- <div class="cols-lg gap22">
-                                            <fieldset class="sku">
-                                                <div class="body-title mb-10">SKU</div>
-                                                <input class="" type="text" placeholder="Enter SKU" name="text" tabindex="0" value="" aria-required="true" required="">
-                                            </fieldset>
-                                            <fieldset class="category">
-                                                <div class="body-title mb-10">Stock <span class="tf-color-1">*</span></div>
-                                                <input class="" type="text" placeholder="Enter Stock" name="text" tabindex="0" value="" aria-required="true" required="">
-                                            </fieldset>
-                                            <fieldset class="sku">
-                                                <div class="body-title mb-10">Tags</div>
-                                                <input class="" type="text" placeholder="Enter a tag" name="text" tabindex="0" value="" aria-required="true" required="">
-                                            </fieldset>
-                                        </div> -->
-                                        <fieldset class="description">
-                                            <div class="body-title mb-10">Description <span class="tf-color-1">*</span></div>
-                                            <textarea class="mb-10" name="description" placeholder="Short description about product" tabindex="0" aria-required="true" required=""></textarea>
-                                            <div class="text-tiny">Do not exceed 100 characters when entering the product name.</div>
-                                        </fieldset>
+                                        <a class="tf-button style-1 w208" href="<? echo base_url('manage/addProduct'); ?>"><i class="icon-plus"></i>Add new</a>
                                     </div>
-                                
-                                    <div class="cols gap10">
-                                        <button class="tf-button w380" type="submit">Add product</button>
-                                        <a class="tf-button style-3 w380" onclick="javascript:clearForm();">Cancel</a>
-                                    </div>
-                                </form>
-                                <!-- /form-add-product -->
+                                    
+                                    <table id="example" style="width:100%" class="list-product-table">
+                                        <thead style="font-size: 200%;">
+                                            <tr>
+                                                <th width="30%">Product</th>
+                                                <th>Product ID</th>
+                                                <th>Price</th>
+                                                <th>Stock</th>
+                                                <th>Quantity</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size: 200%;">
+                                            <? foreach ($products as $key) { ?>
+                                                    <tr>
+                                                        <td><?= $key['name']?></td>
+                                                        <td>#<?= $key['product_id']?></td>
+                                                        <td>RM<?= $key['price']?></td>
+                                                        <td>
+                                                            <?= ($key['stock'] == '0') ? "<div class='block-stock bg-1 fw-7'>Out of stock</div>" : "<div class='block-available bg-1 fw-7'>In stock</div>";?>
+                                                            <!-- <div class="block-stock bg-1 fw-7">In Stock</div></td> -->
+                                                        <td><?= $key['stock']?></td>
+                                                        <td></td>
+                                                    </tr>
+                                            <? } ?>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- /product-list -->
                             </div>
                             <!-- /main-content-wrap -->
                         </div>
@@ -710,74 +565,11 @@
     </div>
     <!-- /#wrapper -->
 
+    <!-- Javascript -->
     <? $this->load->view('template-office/script'); ?>
-    <?/*<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>*/?>
 
-    <script>
-        
-        /*
-        var tempkey = $("#temp-key").val();
-
-        var myDropzone = new Dropzone("#kt_dropzone_1", {
-            url: base_url + 'manage/upload_product_img',
-            paramName: "file", 
-            maxFiles: 10,
-            maxFilesize: 10,
-            // addRemoveLinks: true,
-            acceptedFiles: "image/*", // Accept images only
-            params: {tempkey:tempkey},
-            init: function () {
-                this.on("success", function (file, response) {
-                    // this.removeFile(file); 
-                    $("#load-product-img").html(response.content);
-                })
-                
-
-            }
-        });
-        */
-
-        <?php if ($this->session->flashdata('success')) { ?>
-                
-                var msg = "<? echo $this->session->flashdata('success'); ?>";
-                alert (msg);
-                
-        <?php } ?>
-
-        function clearForm() {
-            document.getElementById("add-product-formid").reset();
-        }
-
-        $('.direct-upload').on('change', function(e) {
-
-            e.preventDefault();
-
-            const formData = new FormData($('#uploadForm')[0]);
-            var tempkey = $("#temp-key").val();
-
-            $.ajax({
-                url: base_url + 'manage/upload_product_img',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                dataType: "json",
-                success: function(data) {
-                    $('#uploadStatus').html(data.content);
-                    console.log(data.content);
-                    // if (data.status === 'success') {
-                    //     console.log('Image uploaded:', data.filePath);
-                    // } else {
-                    //     console.error('Upload failed:', data.message);
-                    // }
-                },
-                error: function() {
-                    $('#uploadStatus').html('Upload error occurred!');
-                }
-            });
-
-        });
-
+    <script type="text/javascript">
+        new DataTable('#example');
     </script>
 
 </body>

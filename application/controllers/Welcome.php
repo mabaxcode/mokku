@@ -14,7 +14,13 @@ class Welcome extends CI_Controller {
 	}
 
 	public function index()
-	{
-		$this->load->view('home');
+	{	
+
+		$data['list_kain_sarung'] = get_any_table_array(array('category' => '1'), 'product');
+		$data['list_kaftan'] = get_any_table_array(array('category' => '2'), 'product');
+		$data['list_kemeja'] = get_any_table_array(array('category' => '3'), 'product');
+		$data['list_kaftan_sepasang'] = get_any_table_array(array('category' => '4'), 'product');
+
+		$this->load->view('home', $data);
 	}
 }
