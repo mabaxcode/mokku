@@ -4,6 +4,21 @@
 
 <? $this->load->view('template/header'); ?>
 
+<style type="text/css">
+    .x-bg-color-yellow{
+        background-color: yellow;
+    }
+    .x-bg-color-blue{
+        background-color: blue;
+    }
+    .x-bg-color-orange{
+        background-color: orange;
+    }
+    .x-bg-color-black{
+        background-color: black;
+    }
+</style>
+
 <body class="preload-wrapper">
     <!-- RTL -->
     <!-- <a href="javascript:void(0);" id="toggle-rtl" class="tf-btn animate-hover-btn btn-fill">RTL</a> -->
@@ -137,11 +152,23 @@
                                                 Color: 
                                             </div>
                                             <div class="variant-picker-values">
-                                                <input id="values-beige" type="radio" name="color1" checked>
-                                                <label class="hover-tooltip radius-60 color-btn" for="values-beige" data-color="beige" data-value="Beige" data-price="<?= $product['price']?>">
-                                                    <span class="btn-checkbox bg-color-beige"></span>
-                                                    <span class="tooltip">Beige</span>
+                                                
+
+                                                <? foreach ($colorarr as $key => $color_val) { ?>
+                                                <? $attcolor = get_any_table_row(array('name' => 'color', 'id' => $color_val), 'attributes'); ?>
+
+
+                                                
+
+                                                <input id="values-<?= $attcolor['value']?>" type="radio" name="color" value="<?= $attcolor['value']?>">
+                                                <label class="hover-tooltip radius-60 color-btn" for="values-<?= $attcolor['value']?>" data-color="<?= $attcolor['value']?>" data-value="<?= $attcolor['id']?>" data-price="<?= $product['price']?>">
+                                                    <span class="btn-checkbox x-bg-color-<?= $attcolor['value']?>"></span>
+                                                    <span class="tooltip"><?= $attcolor['value']?></span>
                                                 </label>
+
+                                                <? } ?>
+
+                                                <?/*
                                                 <input id="values-black" type="radio" name="color1">
                                                 <label class=" hover-tooltip radius-60 color-btn" data-price="<?= $product['price']?>" for="values-black" data-color="black" data-value="Black">
                                                     <span class="btn-checkbox bg-color-black"></span>
@@ -157,21 +184,32 @@
                                                     <span class="btn-checkbox bg-color-white"></span>
                                                     <span class="tooltip">White</span>
                                                 </label>
+
+                                                */?>
                                             </div>
                                         </div>
                                         <div class="variant-picker-item">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="variant-picker-label">
-                                                    Size: <span class="fw-6 variant-picker-label-value">S</span>
+                                                    Size: 
+                                                    <!-- <span class="fw-6 variant-picker-label-value">S</span> -->
                                                 </div>
                                                 <a href="#find_size" data-bs-toggle="modal" class="find-size fw-6">Find your size</a>
                                             </div>
                                             <div class="variant-picker-values">
-                                                <input type="radio" name="size1" id="values-s" checked>
-                                                <label class="style-text size-btn" for="values-s" data-value="S" data-price="<?= $product['price']?>">
-                                                    <p>S</p>
+
+                                                <? foreach ($sizerarr as $key => $size_val) { ?>
+                                                <? $attsize = get_any_table_row(array('name' => 'size', 'id' => $size_val), 'attributes'); ?>
+
+
+                                                <input type="radio" name="size" id="values-<?= $attsize['value']?>" value="<?= $attsize['value']?>">
+                                                <label class="style-text size-btn" for="values-<?= $attsize['value']?>" data-value="<?= $attsize['value']?>" data-price="<?= $product['price']?>">
+                                                    <p><?= $attsize['value']?></p>
                                                 </label>
-                                                <input type="radio" name="size1" id="values-m">
+
+                                                <? } ?>
+
+                                                <!-- <input type="radio" name="size1" id="values-m">
                                                 <label class="style-text size-btn" data-price="<?= $product['price']?>" for="values-m" data-value="M">
                                                     <P>M</P>
                                                 </label>
@@ -182,7 +220,7 @@
                                                 <input type="radio" name="size1" id="values-xl">
                                                 <label class="style-text size-btn" data-price="<?= $product['price']?>" for="values-xl" data-value="XL">
                                                     <p>XL</p>
-                                                </label>
+                                                </label> -->
                                             </div>
                                         </div>
                                     </div>
@@ -196,7 +234,7 @@
                                     </div>
                                     <div class="tf-product-info-buy-button">
                                         <form class="">
-                                            <a href="javascript:void(0);" onclick="addToCart('<?= $user_id?>');" class="tf-btn btn-fill justify-content-center fw-6 fs-16 flex-grow-1 animate-hover-btn"><span>Add to cart -&nbsp;</span><span class="tf-qty-price total-price">RM<?= number_format($product['price'],2)?></span></a>
+                                            <a href="javascript:void(0);" onclick="addToCart('<?= $user_id?>','<?= $product['product_id']?>');" class="tf-btn btn-fill justify-content-center fw-6 fs-16 flex-grow-1 animate-hover-btn"><span>Add to cart -&nbsp;</span><span class="tf-qty-price total-price">RM<?= number_format($product['price'],2)?></span></a>
                                             <!-- <a href="javascript:void(0);" class="tf-product-btn-wishlist hover-tooltip box-icon bg_white wishlist btn-icon-action">
                                                 <span class="icon icon-heart"></span>
                                                 <span class="tooltip">Add to Wishlist</span>
@@ -2393,6 +2431,7 @@
     <!-- /modal find_size -->
 
     <!-- Javascript -->
+    <script type="text/javascript">var base_url = "<?= base_url(); ?>";</script>
     <script type="text/javascript" src="<?= base_url()?>assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?= base_url()?>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url()?>assets/js/swiper-bundle.min.js"></script>
@@ -2411,21 +2450,25 @@
 
     <script type="text/javascript">
         
-        function addToCart(userid){
+        function addToCart(userid, product_id){
 
-            userid = '1';
+            var quantityInput = $(".quantity-product").val();
 
             if (userid == '') {
                 alert ("Please login to your account to continue shopping");
                 return false;
             }
 
+
+            const selectedSize = document.querySelector('input[name="size"]:checked').value;
+            const selectedColor = document.querySelector('input[name="color"]:checked').value;
+            console.log(selectedColor);
+
+
             $.ajax({
                 url: base_url + 'main/addToCart',
                 type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
+                data: {userid:userid, product_id:product_id, selectedSize:selectedSize, selectedColor:selectedColor, quantityInput:quantityInput},
                 dataType: "json",
                 success: function(data) {
                     $('#uploadStatus').html(data.content);

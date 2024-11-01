@@ -15,7 +15,7 @@
                                                             <!-- <li><a href="product-detail.html" class="menu-link-text link">Koleksi Kain Sarung</a></li> -->
                                                             <? if($list_kain_sarung){ ?>
                                                                 <? foreach ($list_kain_sarung as $kain_sarung) { ?>
-                                                                <li><a href="" class="menu-link-text link"><?= $kekain_sarungy['name']?></a></li>
+                                                                <li><a href="<?= base_url('main/productDetail/'.$kain_sarung['product_id'])?>" class="menu-link-text link"><?= $kekain_sarungy['name']?></a></li>
                                                                 <? } ?>
                                                             <? } else {
                                                                     echo "<font color='red'>Product is empty</font>";
@@ -43,7 +43,7 @@
                                                         <ul class="menu-list">
                                                             <? if($list_kemeja){ ?>
                                                                 <? foreach ($list_kemeja as $kemeja) { ?>
-                                                                <li><a href="" class="menu-link-text link"><?= $kemeja['name']?></a></li>
+                                                                <li><a href="<?= base_url('main/productDetail/'.$kemeja['product_id'])?>" class="menu-link-text link"><?= $kemeja['name']?></a></li>
                                                                 <? } ?>
                                                             <? } else {
                                                                     echo "<font color='red'>Product is empty</font>";
@@ -57,7 +57,7 @@
                                                         <ul class="menu-list">
                                                             <? if($list_kaftan_sepasang){ ?>
                                                                 <? foreach ($list_kaftan_sepasang as $sepasang) { ?>
-                                                                <li><a href="" class="menu-link-text link"><?= $sepasang['name']?></a></li>
+                                                                <li><a href="<?= base_url('main/productDetail/'.$kaftan_sepasang['product_id'])?>" class="menu-link-text link"><?= $sepasang['name']?></a></li>
                                                                 <? } ?>
                                                             <? } else {
                                                                     echo "<font color='red'>Product is empty</font>";

@@ -122,6 +122,27 @@ function update_keytab_value($key, $val)
     return $ci->db->affected_rows();
 }
 
+function get_value_from_any_table($tbl, $col, $where, $order_by = false)
+{
+    $ci = load_instance();
+    $ci->load->database();
+
+    $ci->db->select($col);
+    $ci->db->where($where);
+    if ($order_by <> false) {
+        $ci->db->order_by($order_by, 'DESC');
+        $ci->db->limit(1);
+    }
+    $query = $ci->db->get($tbl);
+
+    if ($query->num_rows() > 0) {
+        $result = $query->row();
+        return $result->$col;
+    } else {
+        return false;
+    }
+}
+
 /*
 
 function display_current_dt()
@@ -276,26 +297,7 @@ function get_ref_tutor($id)
     }
 }
 
-function get_value_from_any_table($tbl, $col, $where, $order_by = false)
-{
-    $tco = load_instance();
-    $tco->load->database();
 
-    $tco->db->select($col);
-    $tco->db->where($where);
-    if ($order_by <> false) {
-        $tco->db->order_by($order_by, 'DESC');
-        $tco->db->limit(1);
-    }
-    $query = $tco->db->get($tbl);
-
-    if ($query->num_rows() > 0) {
-        $result = $query->row();
-        return $result->$col;
-    } else {
-        return false;
-    }
-}
 
 function getWeekendDates($startDate, $days = 30) {
     // Create a DateTime object from the provided start date

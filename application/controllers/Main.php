@@ -44,11 +44,16 @@ class Main extends CI_Controller {
 		$data['product_img'] = $product_img;
 		$data['user_id']     = $this->user_id;
 
+
+		$data['colorarr'] = explode("|", $product['color']);
+		$data['sizerarr'] = explode("|", $product['size']);
+
 		$this->load->view('product-detail', $data);
 	}
 
 	function addToCart($data=false)
 	{
-		
+		$post = $this->input->post();
+		print_r($post);	
 	}
 }

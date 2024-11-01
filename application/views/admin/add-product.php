@@ -613,25 +613,31 @@
                                                 </div>
                                                 <div class="variant-picker-values">
 
-                                                    <input type="checkbox" name="size[]" id="values-s" checked value="1">
-                                                    <label class="style-text" for="values-s" data-value="S">
-                                                        <div class="text">S</div>
+                                                    <? foreach ($sizes as $sizeval) { ?>
+                                                    
+                                                    <input type="checkbox" name="size[]" id="values-<?= $sizeval['value']?>" value="<?= $sizeval['id']?>">
+                                                    <label class="style-text" for="values-<?= $sizeval['value']?>" data-value="<?= $sizeval['value']?>">
+                                                        <div class="text"><?= $sizeval['value']?></div>
                                                     </label>
 
-                                                    <input type="checkbox" name="size[]" id="values-m" value="2">
+                                                    <? } ?>
+
+                                                    
+
+                                                    <!-- input type="checkbox" name="size[]" id="values-m" value="6">
                                                     <label class="style-text" for="values-m" data-value="M">
                                                         <div class="text">M</div>
                                                     </label>
 
-                                                    <input type="checkbox" name="size[]" id="values-l" value="3">
+                                                    <input type="checkbox" name="size[]" id="values-l" value="7">
                                                     <label class="style-text" for="values-l" data-value="L">
                                                         <div class="text">L</div>
                                                     </label>
 
-                                                    <input type="checkbox" name="size[]" id="values-xl" value="4">
+                                                    <input type="checkbox" name="size[]" id="values-xl" value="8">
                                                     <label class="style-text" for="values-xl" data-value="XL">
                                                         <div class="text">XL</div>
-                                                    </label>
+                                                    </label> -->
                                                 </div>
                                             </fieldset>
                                             <!-- <fieldset class="variant-picker-item">
